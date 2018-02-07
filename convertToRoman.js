@@ -154,6 +154,8 @@ function getOtherNumber(event) {
   }
 }
 
+//splits the number into inividual integers in an array-
+//then reverses the order of the array.
 function organiseNumbers(integer) {
   if (isNaN(integer) === false) {
     let format = integer.split("").reverse();
@@ -161,10 +163,9 @@ function organiseNumbers(integer) {
   }
 }
 
-
-function convertToNumerals(ber) {
+//converts each integer into roman numerals
+function convertToNumerals(number) {
   let roman = [];
-  let number = ber;
   switch (number[0]) {
     case "1":
     roman.unshift("I");
@@ -202,7 +203,7 @@ function convertToNumerals(ber) {
     roman.unshift("XX");
     break;
     case "3":
-    roman.unshift("X XX");
+    roman.unshift("XXX");
     break;
     case "4":
     roman.unshift("XL");
@@ -319,3 +320,49 @@ function showResult(number, result) {
     $('#results2').html($('<p>' + number + ' = ' + result + '</p>'));
   }
 }
+
+// //third method
+// function changeToNumerals(num) {
+//   const pos1 = ["I","II","III","IV","V","VI","VII","VIII","IX"];
+//   const pos2 = ["X","XX","XXX","X","L","LX","LXX","LXXX","XC"];
+//   const pos3 = ["C","CC","CCC","CD","D","DC","DCC","DCCC","CM"];
+//   const pos4 = ["M","MM","MMM","MMM","V\u0305","V\u0305M","V\u0305MM","V\u0305MMM","V\u0305MMMM"];
+//   const pos5 = ["X\u0305","X\u0305X\u0305","X\u0305X\u0305X\u0305","X\u0305X\u0305X\u0305X\u0305",
+//                 "L\u0305","L\u0305X\u0305","L\u0305X\u0305X\u0305","L\u0305X\u0305X\u0305X\u0305",
+//                 "L\u0305X\u0305X\u0305X\u0305X\u0305"];
+//   let romNum = [];
+//
+//   for( x=0 ; x<num.length ; x++) {
+//     for( y=1 ; y<10 ; y++) {
+//       switch (number[x]) {
+//         case "1":
+//         romNum.unshift(pos[y][1]);
+//         break;
+//         case "2":
+//         romNum.unshift("II");
+//         break;
+//         case "3":
+//         roman.unshift("III");
+//         break;
+//         case "4":
+//         roman.unshift("IV");
+//         break;
+//         case "5":
+//         roman.unshift("V");
+//         break;
+//         case "6":
+//         roman.unshift("VI");
+//         break;
+//         case "7":
+//         roman.unshift("VII");
+//         break;
+//         case "8":
+//         roman.unshift("VIII");
+//         break;
+//         case "9":
+//         roman.unshift("IX");
+//         break;
+//       }
+//     }
+//   }
+// }
