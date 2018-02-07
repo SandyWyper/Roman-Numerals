@@ -1,7 +1,7 @@
 //once the page has loaded a listner is created for a button
 $(document).ready(function() {
   $('#number-submit1').on("click", convertNumber);
-  $('#number-submit2').on("click", secondMethod);
+  // $('#number-submit2').on("click", secondMethod);
 });
 
 //this the main control function
@@ -19,11 +19,12 @@ function getNumber(event) {
   event.preventDefault();
   let input = document.getElementById("number-input1").value;
   if (isNaN(input)) {
-    alert("you must enter a NUMBER");
+    alert("you must enter a fucking NUMBER");
     document.getElementById("number-input1").value = '';
   } else {
     return input;
   }
+  console.log("hello!");
 }
 
 //this function creates an array of letters to determine a given
@@ -124,6 +125,7 @@ function convertToRoman(num) {
 function formatArray(roman) {
   let sense = roman.join('');
   return sense;
+  console.log("format working");
 }
 
 //displays the result on the page only if the input is a number.
@@ -203,7 +205,7 @@ function convertToNumerals(ber) {
     roman.unshift("XX");
     break;
     case "3":
-    roman.unshift("XXX");
+    roman.unshift("X XX");
     break;
     case "4":
     roman.unshift("XL");
