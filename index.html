@@ -19,10 +19,12 @@
 
 <body>
   <div class="wrap">
+
     <div class="header">
       <h1>Roman Numeral Coverter<h1>
       <h3>Enter a number to convert to Roman Numerals</h3>
     </div>
+
     <div class="main">
       <div class="example1">
         <h3 style="text-align:center">A FreeCodeCamp challenge</h3>
@@ -50,7 +52,23 @@
       </div><!--example1-->
       <div class="example2">
         <h4>Version2</h4>
-        <p>alternate working of the same problem</p>
+        <p>For this version I took a slightly different aproach. Instead of whitling the number downwards,
+        I "split()" the number so that each integer is an element of an array.
+          The array is then "reverse()"-ed and dealt with from the first [0] position upwards.
+        this happens with a series of "switch" commands where each number from 1-9 is a "case".</p>
+        <ul>
+          <li>switch(number[0])</li>
+          <li>case "1" => add a "I"</li>
+          <li>case "2" => add a "II" ... etc.</li>
+        </ul>
+          <p>Repeat for each integer of the original number, but with different numerals.</p>
+          <ul>
+            <li>case "1" => add a "X"</li>
+            <li>case "2" => add a "XX" ... etc.</li>
+          </ul>
+          <p>This method takes up a lot more code than the first example, and in my
+            opinion it is further removed from the logic of how the Roman numbering system works.
+            However it still produces the same outcome.  Have a go!</p>
         <form>
           <input type="text" placeholder="  ......  " id="number-input2" value="" maxlength="5" required>
           <button type="submit" id="number-submit2">ALTERAMENTUM</button>
@@ -62,5 +80,7 @@
       </div>
     </div>
   </div> <!--wrap-->
+
 </body>
+
 </html>
