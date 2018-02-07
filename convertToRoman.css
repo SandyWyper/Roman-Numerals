@@ -9,6 +9,10 @@ body {
   background-blend-mode: overlay;
 }
 
+.main {
+  max-width: 900px;
+  margin: auto;
+}
 
 .header {
   background-color: #d0d181;
