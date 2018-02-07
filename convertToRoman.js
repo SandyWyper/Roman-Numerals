@@ -1,7 +1,7 @@
 //once the page has loaded a listner is created for a button
 $(document).ready(function() {
   $('#number-submit1').on("click", convertNumber);
-  // $('#number-submit2').on("click", secondMethod);
+  $('#number-submit2').on("click", secondMethod);
 });
 
 //this the main control function
@@ -13,18 +13,16 @@ function convertNumber() {
   showAnswer(number, romanFormatted);
 }
 
-
 //gets a number from the input field
 function getNumber(event) {
   event.preventDefault();
   let input = document.getElementById("number-input1").value;
   if (isNaN(input)) {
-    alert("you must enter a fucking NUMBER");
+    alert("you must enter a NUMBER");
     document.getElementById("number-input1").value = '';
   } else {
     return input;
   }
-  console.log("hello!");
 }
 
 //this function creates an array of letters to determine a given
@@ -124,13 +122,12 @@ function convertToRoman(num) {
 //combines each array entry into one string value
 function formatArray(roman) {
   let sense = roman.join('');
-  return sense;
-  console.log("format working");
+    return sense;
 }
 
 //displays the result on the page only if the input is a number.
 function showAnswer(number, answer) {
-  if (isNaN(number) === false && number === true) {
+  if (number > 0) {
     $('#results').html($('<p>' + number + ' = ' + answer + '</p>'));
   }
 }
@@ -139,8 +136,8 @@ function secondMethod() {
   let integer = getOtherNumber(event);
   let organise = organiseNumbers(integer);
   let numerals = convertToNumerals(organise);
-  // let reversedNumerals = changeOrder(numerals);
   let numeralFormatted = formatArray(numerals);
+
   showResult(integer, numeralFormatted);
 }
 
@@ -159,9 +156,9 @@ function getOtherNumber(event) {
 
 function organiseNumbers(integer) {
   if (isNaN(integer) === false) {
-  let format = integer.split("").reverse();
-  return format;
-}
+    let format = integer.split("").reverse();
+      return format;
+  }
 }
 
 
@@ -318,12 +315,7 @@ function convertToNumerals(ber) {
 
 //displays the result on the page only if the input is a number.
 function showResult(number, result) {
-  if (isNaN(number) === false && number === true) {
+  if (number>0) {
     $('#results2').html($('<p>' + number + ' = ' + result + '</p>'));
   }
 }
-
-// function changeOrder(arr) {
-//   let array = arr.reverse();
-//   return array;
-// }
