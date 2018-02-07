@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
   <!-- googlefonts-->
-  <link href="https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC|Abril+Fatface" rel="stylesheet">
 
   <script type="text/javascript" src="convertToRoman.js"></script>
   <link rel="stylesheet" href="convertToRoman.css">
@@ -20,22 +20,47 @@
 <body>
   <div class="wrap">
     <div class="header">
-    <h1>Roman Numeral Coverter<h1>
-    <h3>Enter a number to convert it to Roman Numerals</h3>
-</div>
-<div class="main">
-  <form>
-    <input type="text" placeholder="enter a number" id="numberInput" value="" maxlength="20" required>
-    <button type="submit" class="number-submit">convert</button>
-  </form>
+      <h1>Roman Numeral Coverter<h1>
+      <h3>Enter a number to convert to Roman Numerals</h3>
+    </div>
+    <div class="main">
+      <div class="example1">
+        <h3 style="text-align:center">A FreeCodeCamp challenge</h3>
+          &nbsp;
+        <h4>Version1</h4>
+        <p>This task can be completed a couple of different ways.
+        For the first, I used a sequence of "while" statements to whitle
+        the number down.
+        <br> &nbsp; &nbsp; For example:</p>
+        <ul>
+          <li>"while" the number is greater than 9, do this part</li>
+          <li>"if" the number is greater than 10 - add "X" to an array and subtract 10 from the number</li>
+          <li>"else" add "IX" to an array and subtract 9 from the number</li>
+        </ul>
+        <p>So long as it is ordered from largest numeral (M) down to (I), it works fine.
+        Have a go bellow! To view the code on GitHub click <a href="https://github.com/SandyWyper/Roman-Numerals/blob/master/convertToRoman.js"
+        target="_blank">here</a>.</p>
+        <form>
+          <input type="text" placeholder="  ......  " id="number-input1" value="" maxlength="5" required>
+          <button type="submit" id="number-submit1">ALTERAMENTUM</button>
+        </form>
+      </div>
+      <div id="results" style="height: 70px">
 
-  <div id="results">
-</div>
-</div>
+      </div><!--example1-->
+      <div class="example2">
+        <h4>Version2</h4>
+        <p>alternate working of the same problem</p>
+        <form>
+          <input type="text" placeholder="  ......  " id="number-input2" value="" maxlength="5" required>
+          <button type="submit" id="number-submit2">ALTERAMENTUM</button>
+        </form>
+      </div><!--example2-->
 
+      <div id="results2" style="height: 70px">
 
+      </div>
+    </div>
   </div> <!--wrap-->
-
-
 </body>
 </html>

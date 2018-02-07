@@ -1,9 +1,70 @@
 body {
-  background-color: #eaeaea;
+  margin: 0;
+  background-image: url("http://www.myfreetextures.com/wp-content/uploads/2011/06/another-rough-old-and-worn-parchment-paper.jpg");
+  min-height: 900px;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'IM Fell Great Primer SC', serif;
+  background-color: hsla(0,0%,100%,0.3);
+  background-blend-mode: overlay;
 }
+
 
 .header {
   background-color: #d0d181;
-  font-family: 'IM Fell Great Primer SC', serif;
   text-align: center;
+  margin: 0;
+}
+
+form {
+  text-align: center;
+}
+
+input {
+  text-align: center;
+  font-family: 'Times New Roman', cursive;
+  font-size: 18px;
+  background: transparent;
+  padding: 5px;
+  border: 2px solid #505c06;
+  border-radius: 10px;
+  width: 80px;
+}
+input:focus {
+  outline:none;
+}
+
+button {
+  text-align: center;
+  font-family: 'IM Fell Great Primer SC', serif;
+  font-size: 18px;
+  color: #505c06;
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px;
+  border: 2px solid #505c06;
+}
+button:focus {
+  outline:none;
+}
+
+.example1 {
+  padding: 40px 25px 0px 80px;
+  font-family: 'Times New Roman', cursive;
+}
+
+#results {
+  font-size: 35px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+#results2 {
+  font-size: 35px;
+  text-align: center;
+  padding-top: 10px;
+}
+.example2 {
+  padding: 40px 25px 0px 80px;
+  font-family: 'Times New Roman', cursive;
 }
