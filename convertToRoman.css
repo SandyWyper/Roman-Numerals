@@ -20,6 +20,23 @@ body {
   margin: 0;
 }
 
+table,th, td {
+  font-family: 'IM Fell Great Primer SC', serif;
+  text-align: center;
+  border: 1px solid #505c06;
+  margin: 5px;
+}
+
+table.center {
+  margin-left:auto;
+  margin-right:auto;
+}
+
+th, td {
+  width: 40px;
+}
+
+
 form {
   text-align: center;
 }
@@ -57,18 +74,41 @@ button:focus {
   font-family: 'Times New Roman', cursive;
 }
 
-#results {
+#results1 {
   font-size: 35px;
-  text-align: center;
   padding-top: 10px;
+  text-align: center;
 }
 
 #results2 {
   font-size: 35px;
+  padding-top: 10px;
   text-align: center;
+}
+
+#results3 {
+  font-size: 35px;
+text-align: center;
   padding-top: 10px;
 }
+
+#results4 {
+  font-size: 35px;
+text-align: center;
+  padding-top: 10px;
+}
+
 .example2 {
+  padding: 40px 25px 0px 80px;
+  font-family: 'Times New Roman', cursive;
+}
+
+.example3 {
+  padding: 40px 25px 0px 80px;
+  font-family: 'Times New Roman', cursive;
+}
+
+.example4 {
   padding: 40px 25px 0px 80px;
   font-family: 'Times New Roman', cursive;
 }
