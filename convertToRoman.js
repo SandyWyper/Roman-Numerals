@@ -1,7 +1,10 @@
+
 //once the page has loaded a listner is created for a button
 $(document).ready(function() {
   $('#number-submit1').on("click", convertNumber);
   $('#number-submit2').on("click", secondMethod);
+  $('#number-submit3').on("click", thirdMethod);
+  $('#number-submit4').on("click", forthMethod);
 });
 
 //this the main control function
@@ -10,7 +13,7 @@ function convertNumber() {
   let roman = convertToRoman(number);
   let romanFormatted = formatArray(roman);
 
-  showAnswer(number, romanFormatted);
+  showResult1(number, romanFormatted);
 }
 
 //gets a number from the input field
@@ -126,21 +129,26 @@ function formatArray(roman) {
 }
 
 //displays the result on the page only if the input is a number.
-function showAnswer(number, answer) {
+function showResult1(number, answer) {
   if (number > 0) {
-    $('#results').html($('<p>' + number + ' = ' + answer + '</p>'));
+    $('#results1').html($('<p>' + number + ' = ' + answer + '</p>'));
   }
 }
 
+
+//----------------------------------------------------------------
+
+
 function secondMethod() {
   let integer = getOtherNumber(event);
-  let organise = organiseNumbers(integer);
-  let numerals = convertToNumerals(organise);
-  let numeralFormatted = formatArray(numerals);
+  if(integer){
+    let organise = organiseNumbers(integer);
+    let numerals = convertToNumerals(organise);
+    let numeralFormatted = formatArray(numerals);
 
-  showResult(integer, numeralFormatted);
+    showResult2(integer, numeralFormatted);
 }
-
+}
 
 //gets a number from the input field
 function getOtherNumber(event) {
@@ -157,10 +165,8 @@ function getOtherNumber(event) {
 //splits the number into inividual integers in an array-
 //then reverses the order of the array.
 function organiseNumbers(integer) {
-  if (isNaN(integer) === false) {
     let format = integer.split("").reverse();
       return format;
-  }
 }
 
 //converts each integer into roman numerals
@@ -311,58 +317,167 @@ function convertToNumerals(number) {
     roman.unshift("L\u0305X\u0305X\u0305X\u0305X\u0305");
     break;
   }
+  switch (number[5]) {
+    case "1":
+    roman.unshift("C\u0305");
+    break;
+    case "2":
+    roman.unshift("C\u0305C\u0305");
+    break;
+    case "3":
+    roman.unshift("C\u0305C\u0305C\u0305");
+    break;
+    case "4":
+    roman.unshift("C\u0305C\u0305C\u0305C\u0305");
+    break;
+    case "5":
+    roman.unshift("D\u0305");
+    break;
+    case "6":
+    roman.unshift("D\u0305C\u0305");
+    break;
+    case "7":
+    roman.unshift("D\u0305C\u0305C\u0305");
+    break;
+    case "8":
+    roman.unshift("D\u0305X\u0305C\u0305C\u0305");
+    break;
+    case "9":
+    roman.unshift("D\u0305C\u0305C\u0305C\u0305C\u0305");
+    break;
+  }
+  switch (number[6]) {
+    case "1":
+    roman.unshift("M\u0305");
+    break;
+    case "2":
+    roman.unshift("M\u0305M\u0305");
+    break;
+    case "3":
+    roman.unshift("M\u0305M\u0305M\u0305");
+    break;
+    case "4":
+    roman.unshift("M\u0305M\u0305M\u0305M\u0305");
+    break;
+    case "5":
+    roman.unshift("M\u0305M\u0305M\u0305M\u0305M\u0305");
+    break;
+    case "6":
+    roman.unshift("M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305");
+    break;
+    case "7":
+    roman.unshift("M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305");
+    break;
+    case "8":
+    roman.unshift("M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305");
+    break;
+    case "9":
+    roman.unshift("M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305");
+    break;
+  }
   return roman;
 }
 
 //displays the result on the page only if the input is a number.
-function showResult(number, result) {
-  if (number>0) {
+function showResult2(number, result) {
     $('#results2').html($('<p>' + number + ' = ' + result + '</p>'));
+}
+
+//-----------------------------------------------------------------
+// third method
+
+const romArr = [["I","II","III","IV","V","VI","VII","VIII","IX"],
+                ["X","XX","XXX","X","L","LX","LXX","LXXX","XC"],
+                ["C","CC","CCC","CD","D","DC","DCC","DCCC","CM"],
+                ["M","MM","MMM","MMMM","V\u0305","V\u0305M","V\u0305MM","V\u0305MMM","V\u0305MMMM"],
+                ["X\u0305","X\u0305X\u0305","X\u0305X\u0305X\u0305","X\u0305X\u0305X\u0305X\u0305","L\u0305","L\u0305X\u0305","L\u0305X\u0305X\u0305","L\u0305X\u0305X\u0305X\u0305","L\u0305X\u0305X\u0305X\u0305X\u0305"],
+                ["C\u0305","C\u0305C\u0305","C\u0305C\u0305C\u0305","C\u0305C\u0305C\u0305C\u0305","D\u0305","D\u0305C\u0305","D\u0305C\u0305C\u0305","D\u0305C\u0305C\u0305C\u0305","D\u0305C\u0305C\u0305C\u0305C\u0305"],
+                ["M\u0305","M\u0305M\u0305","M\u0305M\u0305M\u0305","M\u0305M\u0305M\u0305M\u0305","M\u0305M\u0305M\u0305M\u0305M\u0305","M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305",
+                "M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305","M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305","M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305M\u0305"]];
+
+
+function thirdMethod() {
+  let cesar = getNumber3(event);
+  let numArr = organiseNumbers(cesar);
+  let parma = changeToNumerals(numArr);
+  let romanFormatted = formatArray(parma);
+
+  showResult3(cesar, romanFormatted);
+}
+
+// //gets a number from the input field
+function getNumber3(event) {
+  event.preventDefault();
+  let input = document.getElementById("number-input3").value;
+  if (isNaN(input)) {
+    alert("you must enter a NUMBER");
+    document.getElementById("number-input3").value = '';
+  } else {
+    return input;
   }
 }
 
-// //third method
-// function changeToNumerals(num) {
-//   const pos1 = ["I","II","III","IV","V","VI","VII","VIII","IX"];
-//   const pos2 = ["X","XX","XXX","X","L","LX","LXX","LXXX","XC"];
-//   const pos3 = ["C","CC","CCC","CD","D","DC","DCC","DCCC","CM"];
-//   const pos4 = ["M","MM","MMM","MMM","V\u0305","V\u0305M","V\u0305MM","V\u0305MMM","V\u0305MMMM"];
-//   const pos5 = ["X\u0305","X\u0305X\u0305","X\u0305X\u0305X\u0305","X\u0305X\u0305X\u0305X\u0305",
-//                 "L\u0305","L\u0305X\u0305","L\u0305X\u0305X\u0305","L\u0305X\u0305X\u0305X\u0305",
-//                 "L\u0305X\u0305X\u0305X\u0305X\u0305"];
-//   let romNum = [];
-//
-//   for( x=0 ; x<num.length ; x++) {
-//     for( y=1 ; y<10 ; y++) {
-//       switch (number[x]) {
-//         case "1":
-//         romNum.unshift(pos[y][1]);
-//         break;
-//         case "2":
-//         romNum.unshift("II");
-//         break;
-//         case "3":
-//         roman.unshift("III");
-//         break;
-//         case "4":
-//         roman.unshift("IV");
-//         break;
-//         case "5":
-//         roman.unshift("V");
-//         break;
-//         case "6":
-//         roman.unshift("VI");
-//         break;
-//         case "7":
-//         roman.unshift("VII");
-//         break;
-//         case "8":
-//         roman.unshift("VIII");
-//         break;
-//         case "9":
-//         roman.unshift("IX");
-//         break;
-//       }
-//     }
-//   }
-// }
+// now that's much better!
+function changeToNumerals(num) {
+  let win = [];
+  for( x=0 ; x<num.length ; x++) {
+      win.unshift(romArr[x][num[x]-1]);
+    }
+    return win;
+}
+
+//displays the result on the page only if the input is a number.
+function showResult3(number, result) {
+  if (number>0) {
+    $('#results3').html($('<p>' + number + ' = ' + result + '</p>'));
+  }
+}
+
+//-----------------------------------------------------------------
+// 4th method
+
+const romanArr = ["M\u0305","C\u0305M\u0305","D\u0305","C\u0305D\u0305","C\u0305","X\u0305C\u0305","L\u0305","X\u0305L\u0305","X\u0305","I\u0305X\u0305","V\u0305","I\u0305V\u0305","M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"]
+const numberArr = [1000000,900000,500000,400000,100000,90000,50000,40000,10000,9000,5000,4000,1000,900,500,400,100,90,50,40,10,9,5,4,1]
+
+function forthMethod() {
+  let numero = getNumber4(event);
+  let answerArr = switchToNumerals(numero);
+
+  showResult4(numero, answerArr);
+}
+
+// //gets a number from the input field
+function getNumber4(event) {
+  event.preventDefault();
+  let input = document.getElementById("number-input4").value;
+  if (isNaN(input)) {
+    alert("you must enter a NUMBER");
+    document.getElementById("number-input4").value = '';
+  } else {
+    return input;
+  }
+}
+
+// now that's even better!
+function switchToNumerals(num) {
+  let answer4 = [];
+  for( x=0 ; x<numberArr.length ; x++) {
+    while (num >= numberArr[x]) {
+      answer4 += romanArr[x];
+      num -= numberArr[x];
+    }
+    }
+    console.log(numberArr.length, romanArr.length);
+    return answer4;
+}
+
+//displays the result on the page only if the input is a number.
+function showResult4(number, result) {
+  if (number>0) {
+    $('#results4').html($('<p>' + number + ' = ' + result + '</p>'));
+  }
+}
+
+
+//-------------------------------------------------------------------
+//convert it back....
