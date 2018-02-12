@@ -135,16 +135,20 @@
       </div><!--example3-->
       <div class="example4">
         <h4>Version4</h4>
-        <p>Combining the logic of the first version with the programming logic of
+        <p>Combining the approach of the first version with the programming logic of
         the third.</p>
           <ul>
-            <li>set out an array for all the numerals as seen above</li>
-            <li>for loop cycles through each index of the given number array</li>
-            <li>at each cycle it selects the correct numeral</li>
+            <li>make two arrays to be referenced. One of numeral character types,
+              and another of their corresponding values as numbers.</li>
+            <li>for loop cycles through the number array and checks - "while" the given number is larger then each index of the array,
+              add the relevent numeral and subtract that value from the given number.</li>
+            <li>if the given number is less than the value of that index of the number array then it moves on to the next one until down to 0.</li>
           </ul>
-          <p>As with the other versions, the Numeral array is then joined and displayed
-            on-screen.  This is far more efficient, at around 50 lines of code -
-            better than method 2 which is around 240 lines. </p>
+          <p>This is far simpler and concise than the previous 3 versions.
+            The only way to improve it now, would be to style the "multiples of one thousand"
+            in HTML instead of in javascript.  At the moment each character is styled using a Uni-Code
+            value, but this doesn't join the over line for numbers such and 2 million or 4 thousand, for example. This can be achivied
+            by style="overline" in an html element, but only for relevent values.</p>
         <ul>
         <form>
           <input type="text" placeholder="  ......  " id="number-input4" value="" maxlength="7" required>
