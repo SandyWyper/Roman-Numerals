@@ -1,11 +1,13 @@
-
+"use strict";
 //once the page has loaded a listner is created for a button
 $(document).ready(function() {
   $('#number-submit1').on("click", convertNumber);
   $('#number-submit2').on("click", secondMethod);
   $('#number-submit3').on("click", thirdMethod);
   $('#number-submit4').on("click", forthMethod);
+  // $('#numeral-submit').on("click", numeralsToNumbers);
 });
+
 
 //this the main control function
 function convertNumber() {
@@ -437,6 +439,7 @@ function showResult3(number, result) {
 // 4th method
 
 const romanArr = ["M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"]
+// why are the last two entries of romanArr in white not yellow? ************************
 const numberArr = [1000000,900000,500000,400000,100000,90000,50000,40000,10000,9000,5000,4000,1000,900,500,400,100,90,50,40,10,9,5,4,1]
 
 function forthMethod() {
@@ -446,9 +449,11 @@ function forthMethod() {
   showResult4(numero, answerArr);
 }
 
-// //gets a number from the input field
+//gets a number from the input field
 function getNumber4(event) {
+//  const xx = 453653;
   event.preventDefault();
+//  debugger;
   let input = document.getElementById("number-input4").value;
   if (isNaN(input)) {
     alert("you must enter a NUMBER");
@@ -460,21 +465,23 @@ function getNumber4(event) {
 
 // now that's even better!
 function switchToNumerals(num) {
-  let answer4big = [];
-  let answer4small = [];
-  let answer4 = [];
+  //create variable that will hold the numerals for values over 4000 and vallues
+  //less than 4000. so that when displaying them, an 'overscore' can show that
+  //the value is a multiple of 1000.
+  let answer4 = [[],[]];
+
+  //work through the number and numeral arrays - subtracting the working amount
+  //and adding the numerals to the answer4 array.
   for( x=0 ; x<numberArr.length ; x++) {
     while (num >= numberArr[x] && num >= 4000) {
-      answer4big += romanArr[x];
+        answer4[0] += romanArr[x];
       num -= numberArr[x];
     }
     while (num >= numberArr[x] && num <4000) {
-      answer4small += romanArr[x];
+      answer4[1] += romanArr[x];
       num -= numberArr[x];
     }
     }
-    answer4[0] = answer4big;
-    answer4[1] = answer4small;
 
     return answer4;
 }
@@ -489,4 +496,27 @@ function showResult4(number, result) {
 
 
 //-------------------------------------------------------------------
-//convert it back....
+// //convert it back....
+// const romanNum = ["M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"]
+//
+// function numeralsToNumbers() {
+//   let numeralGiven = getNumerals(event);
+//   let correctOrder = checkOrder(numeralGiven);
+// }
+//
+// // gets the numerals from the input field
+// function getNumerals(event) {
+//
+//   event.preventDefault();
+//   let input = document.getElementById("numeral-input").value;
+//   console.log(input);
+//   let divided = input.split('');
+//   console.log(divided);
+//
+//     }
+//   }
+// }
+//
+// function checkOrder(rom) {
+// console.log(rom);
+// }
