@@ -506,16 +506,19 @@ function showResult4(number, result) {
 //-------------------------------------------------------------------
 // //convert it back....
 
-//array of Numerals in decending order
-const romanNum = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
-
 //controller
 function numeralsToNumbers() {
-  let numeralGiven = getNumerals(event);
-  if(numeralGiven){
-    let correctOrder = checkNumeralOrder(numeralGiven);
-  }
-  // let correctOrder = checkOrder(numeralGiven);
+  let numeralsGiven = getNumerals(event);
+  if (numeralsGiven) {
+    //change numeral string into an array of letters
+    let numeralsArray = breakAndCapitalise(numeralsGiven);
+    //pair any numerals that belong together
+    let pairedNumerals = pairNumerals(numeralsArray);
+    //check to see that numerals are in a valid order
+    let validOrder = checkNumeralOrder(pairedNumerals);
+    console.log(validOrder + "This is in the correct order.");
+}
+
 }
 
 // gets the numerals from the input field
@@ -523,26 +526,163 @@ function getNumerals(event) {
   event.preventDefault();
 
   let input = document.getElementById("numeral-input").value;
-  console.log(input);
 
   //regex test for Roman Numerals
   const numeralRegex = /^[mdclxvi]*$/gi;
-  let containsOnlyNumerals = numeralRegex.test(input);
-
-
-  if(containsOnlyNumerals === false){
+  if (!numeralRegex.test(input)) {
     alert("you must enter a ROMAN NUMERAL");
     document.getElementById("numeral-input").value = '';
   } else {
     return input;
   }
+}
 
+
+//change numeral string into an array of letters
+function breakAndCapitalise(rom) {
+  return rom.toUpperCase().split('');
+}
+
+//pair numerals that belong together
+function pairNumerals(arr) {
+  let filteredArray = [];
+  for (let i = 0; i < arr.length; i++) {
+    switch (arr[i]) {
+      case "M":
+      case "D":
+      case "L":
+      case "V":
+        filteredArray.push(arr[i]);
+        break;
+      case "C":
+        if (arr[i + 1] === "M" || arr[i + 1] === "D") {
+          filteredArray.push(arr[i] + arr[i + 1]);
+          i++;
+        } else {
+          filteredArray.push(arr[i]);
+        }
+        break;
+      case "X":
+        if (arr[i + 1] === "C" || arr[i + 1] === "L") {
+          filteredArray.push(arr[i] + arr[i + 1]);
+          i++;
+        } else {
+          filteredArray.push(arr[i]);
+        }
+        break;
+      case "I":
+        if (arr[i + 1] === "X" || arr[i + 1] === "V") {
+          filteredArray.push(arr[i] + arr[i + 1]);
+          i++;
+        } else {
+          filteredArray.push(arr[i]);
+        }
+        break;
+    }
+  }
+  return filteredArray;
 }
 
 
 
 function checkNumeralOrder(rom) {
+  //array of Numerals in decending order of value
+  const romanNum = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+  const nonRepeaters = ["CM", "D", "CD", "XC", "L", "XL", "IX", "V", "IV"]
+  let correctOrderCounter = 0;
+  console.log("rom = " + rom)
 
-
-console.log(rom+"funk work");
+  //cycle through each value in the array. cross checking our given array with
+  //an array of roman numerals in value order.
+  for (let x = 0; x < rom.length; x++) {
+    console.log(rom[x] + " = " + romanNum.indexOf(rom[x]));
+    //if the value of the numeral is less than that of the next one in the array
+    //then it is an invalid order - show an alert and clear input field
+    if (romanNum.indexOf(rom[x]) > romanNum.indexOf(rom[x + 1]) && rom[x + 1] !== undefined) {
+      alert("This is an invalid order of Roman Numerals. wrong order, numerals should be in decending order.");
+      document.getElementById("numeral-input").value = '';
+      break;
+    }
+    //there are certain numerals that must not be iterated twice in succession
+    else if (nonRepeaters.indexOf(rom[x]) >= 0 && rom[x] === rom[x + 1] &&
+      rom[x + 1] !== undefined) {
+      alert("This is an invalid order of Roman Numerals. no repeaters.");
+      document.getElementById("numeral-input").value = '';
+      break;
+    }
+    //900(CM) or 400(CD) cannot be follwed by 500(D) or 400 (CD) or 100(C)
+    else if (romanNum.indexOf(rom[x]) === 1 && romanNum.indexOf(rom[x + 1]) < 5 && rom[x + 1] !== undefined ||
+      romanNum.indexOf(rom[x]) === 3 && romanNum.indexOf(rom[x + 1]) < 5 && rom[x + 1] !== undefined) {
+      alert("This is an invalid order of Roman Numerals. no 500 after 900.");
+      document.getElementById("numeral-input").value = '';
+      break;
+    }
+    //500 can't be followed by a 400
+    else if (rom[x] === "D" && rom[x + 1] === "CD" && rom[x + 1] !== undefined) {
+      alert("This is an invalid order of Roman Numerals. no 400 after 500.");
+      document.getElementById("numeral-input").value = '';
+      break;
+    }
+    //90(XC) or 40(XL) cannot be followed by 50(L), 40(XL), or 10(X)
+    else if (romanNum.indexOf(rom[x]) === 5 && romanNum.indexOf(rom[x + 1]) < 9 && rom[x + 1] !== undefined ||
+      romanNum.indexOf(rom[x]) === 7 && romanNum.indexOf(rom[x + 1]) < 9 && rom[x + 1] !== undefined) {
+      alert("This is an invalid order of Roman Numerals. no 50 after 90.");
+      document.getElementById("numeral-input").value = '';
+      break;
+    }
+    //50(L) can't be followed by a 40(IV)
+    else if (rom[x] === "L" && rom[x + 1] === "XL" && rom[x + 1] !== undefined) {
+      alert("This is an invalid order of Roman Numerals. No 40 after 50.");
+      document.getElementById("numeral-input").value = '';
+      break;
+    }
+    //9(IX) cannot be followed by a 5(V) or a 4(IV)
+    else if (rom[x] === "IX" && romanNum.indexOf(rom[x + 1]) < 13 && rom[x + 1] !== undefined ||
+      rom[x] === "IV" && romanNum.indexOf(rom[x + 1]) < 13 && rom[x + 1] !== undefined) {
+      alert("This is an invalid order of Roman Numerals. no 5 after 9.");
+      document.getElementById("numeral-input").value = '';
+      break;
+    }
+    //C(100), X(10) and I(1) can be repeated only 3 times.
+    else if (rom[x] === "C" && rom[x + 1] === "C" && rom[x + 2] === "C" && rom[x + 3] === "C" ||
+      rom[x] === "X" && rom[x + 1] === "X" && rom[x + 2] === "X" && rom[x + 3] === "X" ||
+      rom[x] === "I" && rom[x + 1] === "I" && rom[x + 2] === "I" && rom[x + 3] === "I") {
+      alert("This is an invalid order of Roman Numerals. you cant repeat C,X or I more than three times.");
+      document.getElementById("numeral-input").value = '';
+      break;
+    } else {
+      correctOrderCounter++;
+    }
+  }
+  if(correctOrderCounter === rom.length){
+    return rom;
+  }
 }
+
+//check the array of numerals for ones that should be joined together
+
+
+//cycle through "seperated" and deal with each numeral.
+//making sure that each numeral is in the correct order and pair those that
+//to be joined together - "XC" for example
+// for (let x = 0; x < seperated.length; x++) {
+//   switch (seperated[x]) {
+//
+//     //when an "M" is identified - it must not be proceeded by anything but
+//     //another "M" or a "C". If a "C" then group the two values.
+//     case "M":
+//       if (x === 0 ){
+//         correctNumeral.push(seperated[x]);
+//       }else if(x > 0 && seperated[x - 1] === "M" || "C") {
+//         correctNumeral.push(seperated[x]);
+//       } else {
+//         alert("you must enter a ROMAN NUMERAL");
+//         document.getElementById("numeral-input").value = '';
+//         // correctNumeral.push(seperated)
+//         console.log("C before m");
+//       }
+//       console.log(correctNumeral);
+//
+//       break;
+//   }
+// }
