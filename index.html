@@ -161,19 +161,23 @@
       </div><!--example4-->
       <div class="back2Numbers">
         <h4>Converting back to numbers</h4>
-        <p>.........................</p>
+        <p>Take a string of letters and convert it to numbers using the principles of Roman Numerals.</p>
           <ul>
-            <li>........</li>
-            <li>..............</li>
-            <li>.............</li>
+            <li>use Regex to filter the input for the correct characters.</li>
+            <li>capitalise and split the string into an array of characters.</li>
+            <li>join together the characters, for example X and C to make XC(90).</li>
+            <li>numerals need to pass many tests to establish if they are in the correct order.</li>
           </ul>
-          <p>............</p>
+          <p>Changing the numerals into numbers is by far the easiest part of this excerise.
+          Descerning the correct characters and order of the characters involved requires many different actions.
+        For example, the numerals must be in descending order. Also, certain values can't repeat and can only be followed
+      by other values.  A 90(XC) can't be folllowed by 50(L).  </p>
         <ul>
         <form>
-          <input type="text" placeholder="  ......  " id="numeral-input" value="" maxlength="10" required>
+          <input type="text" placeholder="  ......  " id="numeral-input" value="" maxlength="20" required>
           <button type="submit" id="numeral-submit">ALTERAMENTUM</button>
         </form>
-        <div id="results4" style="height: 70px">
+        <div id="results5" style="height: 70px">
 
         </div>
       </div><!--back2Numbers-->

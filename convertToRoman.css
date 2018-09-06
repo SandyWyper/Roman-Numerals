@@ -49,7 +49,7 @@ input {
   padding: 5px;
   border: 2px solid #505c06;
   border-radius: 10px;
-  width: 80px;
+  width: 150px;
 }
 input:focus {
   outline:none;
@@ -98,6 +98,12 @@ text-align: center;
   padding-top: 10px;
 }
 
+#results5 {
+  font-size: 35px;
+text-align: center;
+  padding-top: 10px;
+}
+
 .example2 {
   padding: 40px 25px 0px 80px;
   font-family: 'Times New Roman', cursive;
@@ -109,6 +115,10 @@ text-align: center;
 }
 
 .example4 {
+  padding: 40px 25px 0px 80px;
+  font-family: 'Times New Roman', cursive;
+}
+.back2Numbers {
   padding: 40px 25px 0px 80px;
   font-family: 'Times New Roman', cursive;
 }
