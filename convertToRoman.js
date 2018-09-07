@@ -598,7 +598,6 @@ function checkNumeralOrder(rom) {
   //cycle through each value in the array. cross checking our given array with
   //an array of roman numerals in value order.
   for (let x = 0; x < rom.length; x++) {
-    console.log(rom[x] + " = " + romanNum.indexOf(rom[x]));
     //if the value of the numeral is less than that of the next one in the array
     //then it is an invalid order - show an alert and clear input field
     if (romanNum.indexOf(rom[x]) > romanNum.indexOf(rom[x + 1]) && rom[x + 1] !== undefined) {
