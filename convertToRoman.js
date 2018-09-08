@@ -443,9 +443,14 @@ function showResult3(number, result) {
 //-----------------------------------------------------------------
 // 4th method
 
-const romanArr = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
-// why are the last two entries of romanArr in white not yellow? ************************
-const numberArr = [1000000, 900000, 500000, 400000, 100000, 90000, 50000, 40000, 10000, 9000, 5000, 4000, 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+const romanArr = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V",
+  "IV", "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX",
+  "V", "IV", "I"
+]
+const numberArr = [1000000, 900000, 500000, 400000, 100000, 90000, 50000, 40000,
+  10000, 9000, 5000, 4000, 1000, 900, 500, 400, 100, 90, 50, 40,
+  10, 9, 5, 4, 1
+]
 
 function forthMethod() {
   let numero = getNumber4(event);
@@ -593,6 +598,10 @@ function checkNumeralOrder(rom) {
   //array of Numerals in decending order of value
   const romanNum = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
   const nonRepeaters = ["CM", "D", "CD", "XC", "L", "XL", "IX", "V", "IV"]
+  const condition1 = (val1, val2, cond1, cond2) => romanNum.indexOf(val1) === cond1 && romanNum.indexOf(val2) === cond2 && val2 !== undefined;
+  const condition2 = (val1, val2, cond1, cond2, cond3) => romanNum.indexOf(val1) === cond1 &&
+    romanNum.indexOf(val2) < cond2 && val2 !== undefined ||
+    romanNum.indexOf(val1) === cond3 && romanNum.indexOf(val2) < cond2 && val2 !== undefined;
   let correctOrderCounter = 0;
 
   //cycle through each value in the array. cross checking our given array with
@@ -602,47 +611,44 @@ function checkNumeralOrder(rom) {
     //then it is an invalid order - show an alert and clear input field
     if (romanNum.indexOf(rom[x]) > romanNum.indexOf(rom[x + 1]) && rom[x + 1] !== undefined) {
       alert("This is an invalid order of Roman Numerals. wrong order, numerals should be in decending order.");
-      document.getElementById("numeral-input").value = '';
+      wipeInput();
       break;
     }
     //there are certain numerals that must not be iterated twice in succession
     else if (nonRepeaters.indexOf(rom[x]) >= 0 && rom[x] === rom[x + 1] &&
       rom[x + 1] !== undefined) {
       alert("This is an invalid order of Roman Numerals. Some numerals can't repeat like that.");
-      document.getElementById("numeral-input").value = '';
+      wipeInput();
       break;
     }
     //900(CM) or 400(CD) cannot be follwed by 500(D) or 400 (CD) or 100(C)
-    else if (romanNum.indexOf(rom[x]) === 1 && romanNum.indexOf(rom[x + 1]) < 5 && rom[x + 1] !== undefined ||
-      romanNum.indexOf(rom[x]) === 3 && romanNum.indexOf(rom[x + 1]) < 5 && rom[x + 1] !== undefined) {
+    else if (condition2(rom[x], rom[x + 1], 1, 5, 3)) {
       alert("This is an invalid order of Roman Numerals. 900 or 400 can't be followed by a 500,400 or 100.");
-      document.getElementById("numeral-input").value = '';
+      wipeInput();
       break;
     }
     //500 can't be followed by a 400
-    else if (rom[x] === "D" && rom[x + 1] === "CD" && rom[x + 1] !== undefined) {
+    else if (condition1(rom[x], rom[x + 1], 2, 3)) {
       alert("This is an invalid order of Roman Numerals. no 400 after 500.");
-      document.getElementById("numeral-input").value = '';
+      wipeInput();
       break;
     }
     //90(XC) or 40(XL) cannot be followed by 50(L), 40(XL), or 10(X)
-    else if (romanNum.indexOf(rom[x]) === 5 && romanNum.indexOf(rom[x + 1]) < 9 && rom[x + 1] !== undefined ||
-      romanNum.indexOf(rom[x]) === 7 && romanNum.indexOf(rom[x + 1]) < 9 && rom[x + 1] !== undefined) {
+    else if (condition2(rom[x], rom[x + 1], 5, 9, 7)) {
       alert("This is an invalid order of Roman Numerals. 90 or 40 can't be followed by 50, 40 or 10.");
-      document.getElementById("numeral-input").value = '';
+      wipeInput();
       break;
     }
     //50(L) can't be followed by a 40(IV)
-    else if (rom[x] === "L" && rom[x + 1] === "XL" && rom[x + 1] !== undefined) {
+    else if (condition1(rom[x], rom[x + 1], 6, 7)) {
       alert("This is an invalid order of Roman Numerals. No 40 after 50.");
-      document.getElementById("numeral-input").value = '';
+      wipeInput();
       break;
     }
     //9(IX) cannot be followed by a 5(V) or a 4(IV)
-    else if (rom[x] === "IX" && romanNum.indexOf(rom[x + 1]) < 13 && rom[x + 1] !== undefined ||
-      rom[x] === "IV" && romanNum.indexOf(rom[x + 1]) < 13 && rom[x + 1] !== undefined) {
+    else if (condition2(rom[x], rom[x+1], 9, 13, 11)) {
       alert("This is an invalid order of Roman Numerals. 9 or 4 can't by followed by a 5,4 or 1.");
-      document.getElementById("numeral-input").value = '';
+      wipeInput();
       break;
     }
     //C(100), X(10) and I(1) can be repeated only 3 times.
@@ -650,7 +656,7 @@ function checkNumeralOrder(rom) {
       rom[x] === "X" && rom[x + 1] === "X" && rom[x + 2] === "X" && rom[x + 3] === "X" ||
       rom[x] === "I" && rom[x + 1] === "I" && rom[x + 2] === "I" && rom[x + 3] === "I") {
       alert("This is an invalid order of Roman Numerals. you cant repeat C,X or I more than three times.");
-      document.getElementById("numeral-input").value = '';
+      wipeInput();
       break;
     } else {
       correctOrderCounter++;
@@ -659,6 +665,11 @@ function checkNumeralOrder(rom) {
   if (correctOrderCounter === rom.length) {
     return rom;
   }
+}
+
+//clears the input field
+function wipeInput() {
+  document.getElementById("numeral-input").value = '';
 }
 
 
@@ -678,6 +689,7 @@ function changeNumeralsToNumbers(rom) {
   return arrIntoNumbers.reduce(reducer);
 }
 
+//display results in the DOM
 function showResult5(rom, num) {
   if (num > 0) {
     $('#results5').html($('<p>' + rom + ' = ' + num + '</p>'));
