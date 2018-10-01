@@ -598,10 +598,16 @@ function checkNumeralOrder(rom) {
   //array of Numerals in decending order of value
   const romanNum = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
   const nonRepeaters = ["CM", "D", "CD", "XC", "L", "XL", "IX", "V", "IV"]
+  const repeaters = ["C", "X", "I"]
+  //condition1 is for values like 5 that can't be follwed by a 4. works for 5, 50 and 500
   const condition1 = (val1, val2, cond1, cond2) => romanNum.indexOf(val1) === cond1 && romanNum.indexOf(val2) === cond2 && val2 !== undefined;
+  //condition2 is for values like 9's and 4's. can't be followed by a 5,4 or 1.
   const condition2 = (val1, val2, cond1, cond2, cond3) => romanNum.indexOf(val1) === cond1 &&
     romanNum.indexOf(val2) < cond2 && val2 !== undefined ||
     romanNum.indexOf(val1) === cond3 && romanNum.indexOf(val2) < cond2 && val2 !== undefined;
+    // condition 3 stops C,X or I being repeated more than three times in a row.
+  const condition3 = (val1, val2, val3, val4) => repeaters.indexOf(val1) >= 0 && val1 === val2 && val1 === val3 && val1 === val4;
+
   let correctOrderCounter = 0;
 
   //cycle through each value in the array. cross checking our given array with
@@ -646,15 +652,13 @@ function checkNumeralOrder(rom) {
       break;
     }
     //9(IX) cannot be followed by a 5(V) or a 4(IV)
-    else if (condition2(rom[x], rom[x+1], 9, 13, 11)) {
+    else if (condition2(rom[x], rom[x + 1], 9, 13, 11)) {
       alert("This is an invalid order of Roman Numerals. 9 or 4 can't by followed by a 5,4 or 1.");
       wipeInput();
       break;
     }
     //C(100), X(10) and I(1) can be repeated only 3 times.
-    else if (rom[x] === "C" && rom[x + 1] === "C" && rom[x + 2] === "C" && rom[x + 3] === "C" ||
-      rom[x] === "X" && rom[x + 1] === "X" && rom[x + 2] === "X" && rom[x + 3] === "X" ||
-      rom[x] === "I" && rom[x + 1] === "I" && rom[x + 2] === "I" && rom[x + 3] === "I") {
+    else if (condition3(rom[x], rom[x+1], rom[x+2], rom[x+3])) {
       alert("This is an invalid order of Roman Numerals. you cant repeat C,X or I more than three times.");
       wipeInput();
       break;

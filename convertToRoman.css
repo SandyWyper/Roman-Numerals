@@ -1,12 +1,12 @@
 body {
   margin: 0;
-  background-image: url("http://thedigitalyardsale.com/freebies/7-17/old_paper1.jpg");
+  /* background-image: url("http://thedigitalyardsale.com/freebies/7-17/old_paper1.jpg"); */
   min-height: 900px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'IM Fell Great Primer SC', serif;
-  background-color: hsla(0,0%,100%,0.3);
+  background-color: #dbdbb5;
   background-blend-mode: overlay;
 }
 
