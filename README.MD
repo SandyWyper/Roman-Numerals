@@ -2,8 +2,8 @@
 
 ### Enter a number and have it displayed as a roman numeral.
 
-#### I've done this task two different ways, just to see which was best.
-#### The first seemed a bit basic, but ended up being shorter and more logical in my opinion.
+#### I've done this task four different ways, just to see which was best.
+#### Then I build a converter from numerals back to numbers.
 
 #### Version 1
 * Take the number from input1
